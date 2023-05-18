@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "944389168884",
+    "firebase_url": "https://database-imc-calculator-default-rtdb.firebaseio.com",
+    "project_id": "database-imc-calculator",
+    "storage_bucket": "database-imc-calculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944389168884:android:9442185f2378d40180c8a1",
+        "android_client_info": {
+          "package_name": "com.example.imc_calculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944389168884-0auv1fau1umpuebp20bgeslgm5ur63r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrzZBQGAG2Nn2d9Fdfer3iOjog9CUXRx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944389168884-0auv1fau1umpuebp20bgeslgm5ur63r2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
