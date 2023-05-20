@@ -40,7 +40,7 @@ class ImcController {
     _imcService.salvarIMC(altura, peso, imc);
   }
 
-  // Busca todos os imc registrados
+  // Busca todos os imc registrados -> é uma lista dinâmica de ImcModels
   Future<List<dynamic>> getImcs() async{
     return await _imcService.getImcs();
   }
