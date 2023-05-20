@@ -1,9 +1,7 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:uuid/uuid.dart';
+import 'package:imc_calculator/controller/imc_controller.dart';
 import 'firebase_options.dart';
-import 'dart:math' show pow;
 
 void main() async {
   // Garante que o SDK do Flutter será inicializado;
@@ -37,50 +35,16 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  final TextEditingController _controllerPeso = TextEditingController();
-  final TextEditingController _controllerAltura = TextEditingController();
+  final _imcController = ImcController();
 
-  String imcResultado = '';
-
-  double finalResult = 0;
-
-  _salvarIMC(double altura, double peso, double imc) async {
-    // Gerando id para o cálculo do imc
-    const uuid = Uuid();
-
-    // Criação de um documento exclusivo para cada imc
-    DatabaseReference imcDatabaseReference =
-        FirebaseDatabase.instance.ref('imc/${uuid.v4()}');
-
-    // Salvando a informação no realtime database
-    await imcDatabaseReference.set({
-      "altura": altura,
-      "peso": peso,
-      "imc": imc,
+  void _clearField() {
+    setState(() {
+      _imcController.controllerPeso.clear();
+      _imcController.controllerAltura.clear();
     });
   }
 
-  void _calculate() {
-    var peso = double.parse(_controllerPeso.text);
-    var altura = double.parse(_controllerAltura.text) * 0.01;
-
-    double imc = peso / pow(altura, 2);
-
-    if (imc < 18.6) {
-      imcResultado = 'Abaixo do peso';
-    } else if (imc > 18.7 && imc < 24.9) {
-      imcResultado = 'Peso ideal';
-    } else if (imc > 25 && imc < 29.9) {
-      imcResultado = 'Levemente acima do peso';
-    } else if (imc > 30 && imc < 34.9) {
-      imcResultado = 'Obesidade grau I';
-    } else if (imc > 35 && imc < 39.9) {
-      imcResultado = 'Obesidade grau II';
-    } else if (imc >= 40) {
-      imcResultado = 'Obesidade grau III';
-    }
-    _salvarIMC(altura, peso, imc);
-
+  void _showMensage(double imc, String imcResultado){
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -92,11 +56,9 @@ class _MyHomeState extends State<MyHome> {
     );
   }
 
-  void _clearField() {
-    setState(() {
-      _controllerPeso.clear();
-      _controllerAltura.clear();
-    });
+  void calculate(){
+    _imcController.calculate();
+    _showMensage(_imcController.imc, _imcController.imcResultado);
   }
 
   @override
@@ -134,7 +96,7 @@ class _MyHomeState extends State<MyHome> {
                 width: 300.0,
                 margin: const EdgeInsets.all(10.0),
                 child: TextField(
-                  controller: _controllerPeso,
+                  controller: _imcController.controllerPeso,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     //label: Text('teste: '),
@@ -158,7 +120,7 @@ class _MyHomeState extends State<MyHome> {
                 width: 300.0,
                 margin: const EdgeInsets.all(10.0),
                 child: TextField(
-                  controller: _controllerAltura,
+                  controller: _imcController.controllerAltura,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     //label: Text('teste: '),
@@ -176,32 +138,6 @@ class _MyHomeState extends State<MyHome> {
                   ),
                 ),
               ),
-
-              /*
-                Container(
-                  width: 300.0,
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    controller: _alcoolValue,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      label: Text('teste: '),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 300.0,
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    controller: _gasValue,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      label: Text('Type here how much gasoline you want: '),
-                    ),
-                  ),
-                ),
-                */
-
               // Buttom
               SizedBox(
                 width: 300.0,
@@ -218,7 +154,7 @@ class _MyHomeState extends State<MyHome> {
                     ),
                   ),
                   //onPressed: _calculate,
-                  onPressed: _calculate,
+                  onPressed: calculate,
                   child: const Text(
                     "Calcular",
                     style: TextStyle(
@@ -229,14 +165,6 @@ class _MyHomeState extends State<MyHome> {
                 ),
               ),
 
-              /*
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text('Press the buttom above to check the result'),
-                ),
-              ),
-              */
             ],
           ),
         ),
