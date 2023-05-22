@@ -12,7 +12,6 @@ class ImcController {
   double imc = 0;
   double finalResult = 0;
 
-
   String _showResult(double imc) {
     if (imc < 18.6) {
       return 'Abaixo do peso';
@@ -36,12 +35,21 @@ class ImcController {
 
     imc = peso / pow(altura, 2);
     imcResultado = _showResult(imc);
-    
+
     _imcService.salvarIMC(altura, peso, imc);
   }
 
   // Busca todos os imc registrados -> é uma lista dinâmica de ImcModels
-  Future<List<dynamic>> getImcs() async{
-    return await _imcService.getImcs();
+  Future<List<dynamic>> getImcs() async {
+    var imcs = await _imcService.getImcs();
+
+    imcs.sort((a, b) {
+      var dataA = DateTime.tryParse(a.createdAt)!;
+      var dataB = DateTime.tryParse(b.createdAt)!;
+
+      return dataB.compareTo(dataA);
+    });
+
+    return imcs;
   }
 }

@@ -13,12 +13,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-     MaterialApp(
+    MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const MyHome(),
-      routes: {
-        "history": (context) => const History()
-      },
+      routes: {"history": (context) => const History()},
     ),
   );
 }

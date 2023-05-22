@@ -13,13 +13,19 @@ class ImcService {
   // tranforma o objeto no modelo de dados
   List<dynamic> _mapForImcModel(Map objeto) {
     return objeto['imc'].entries.map((entry) {
+      String id = entry.key;
+      num altura = entry.value['altura'];
+      num peso = entry.value['peso'];
+      num imc = entry.value['imc'];
+      String createdAt = entry.value['created_at'];
 
-            String id = entry.key;
-            num altura = entry.value['altura'];
-            num peso = entry.value['peso'];
-            num imc = entry.value['imc'];
-
-            return ImcModel(id, altura, peso, imc);
+      return ImcModel(
+        id,
+        altura,
+        peso,
+        imc,
+        createdAt
+      );
     }).toList();
   }
 
@@ -35,6 +41,7 @@ class ImcService {
       "altura": altura,
       "peso": peso,
       "imc": imc,
+      "created_at": DateTime.now().toString()
     });
   }
 

@@ -33,26 +33,50 @@ class _HistoryState extends State<History> {
                     itemBuilder: (context, index) {
                       ImcModel? imcModel = snapshot.data![index];
                       return Card(
+                        margin: EdgeInsets.all(15),
                         child: Column(
                           children: [
-                            Row(
-                              children: [
-                                const Text('Altura'),
-                                Text(imcModel!.altura.toString()),
-                              ],
+                            Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                          'IMC: ${imcModel!.imc.toStringAsPrecision(3)}',
+                                          style: TextStyle(fontSize: 20)),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                          'Altura: ${imcModel.altura.toStringAsPrecision(3)}',
+                                          style: TextStyle(fontSize: 15))
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('Peso: ${imcModel.peso.toString()}',
+                                          style: TextStyle(fontSize: 15)),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('data: ${imcModel.createdAt} ')
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
                             ),
-                            Row(
-                              children: [
-                                const Text('Peso'),
-                                Text(imcModel.peso.toString()),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Text('IMC'),
-                                Text(imcModel.imc.toString())
-                              ],
-                            )
                           ],
                         ),
                       );
