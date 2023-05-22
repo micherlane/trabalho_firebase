@@ -33,37 +33,37 @@ class _HistoryState extends State<History> {
                     itemBuilder: (context, index) {
                       ImcModel? imcModel = snapshot.data![index];
                       return Card(
-                        margin: EdgeInsets.all(15),
+                        margin: const EdgeInsets.all(15),
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.only(left: 10, right: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 10),
                               child: Column(
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Row(
                                     children: [
                                       Text(
                                           'IMC: ${imcModel!.imc.toStringAsPrecision(3)}',
-                                          style: TextStyle(fontSize: 20)),
+                                          style: const TextStyle(fontSize: 20)),
                                     ],
                                   ),
                                   Row(
                                     children: [
                                       Text(
                                           'Altura: ${imcModel.altura.toStringAsPrecision(3)}',
-                                          style: TextStyle(fontSize: 15))
+                                          style: const TextStyle(fontSize: 15))
                                     ],
                                   ),
                                   Row(
                                     children: [
                                       Text('Peso: ${imcModel.peso.toString()}',
-                                          style: TextStyle(fontSize: 15)),
+                                          style: const TextStyle(fontSize: 15)),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Row(
@@ -71,7 +71,7 @@ class _HistoryState extends State<History> {
                                       Text('data: ${imcModel.createdAt} ')
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],

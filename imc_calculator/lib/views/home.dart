@@ -50,11 +50,11 @@ class _MyHomeState extends State<MyHome> {
             onPressed: () {
               Navigator.pushNamed(context, 'history');
             },
-            style: ButtonStyle(
+            style: const ButtonStyle(
               iconColor: MaterialStatePropertyAll(Colors.white),
             ),
-            icon: Icon(Icons.history_sharp),
-            label: Text(
+            icon: const Icon(Icons.history_sharp),
+            label: const Text(
               'Histórico',
               style: TextStyle(color: Colors.white),
             )),
@@ -68,14 +68,14 @@ class _MyHomeState extends State<MyHome> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 30),
         //padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text('Calcule seu IMC',
+              const Text('Calcule seu IMC',
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
               const SizedBox(
                 height: 20,
@@ -85,7 +85,7 @@ class _MyHomeState extends State<MyHome> {
                 width: 300.0,
                 margin: const EdgeInsets.all(10.0),
                 child: TextField(
-                  decoration: InputDecoration(labelText: 'Peso (Kg)'),
+                  decoration: const InputDecoration(labelText: 'Peso (Kg)'),
                   controller: _imcController.controllerPeso,
                   keyboardType: TextInputType.number,
                 ),
@@ -98,7 +98,7 @@ class _MyHomeState extends State<MyHome> {
                 width: 300.0,
                 margin: const EdgeInsets.all(10.0),
                 child: TextField(
-                  decoration: InputDecoration(labelText: 'Altura (cm)'),
+                  decoration: const InputDecoration(labelText: 'Altura (cm)'),
                   controller: _imcController.controllerAltura,
                   keyboardType: TextInputType.number,
                 ),
